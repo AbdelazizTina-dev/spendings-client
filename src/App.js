@@ -10,7 +10,7 @@ export default function App() {
   return (
     <>
       <Layout>
-        <Form />
+        <Form setSpendings={setSpendings}/>
         <FiltersAndOrderings />
         <SpendingList
           spendings={spendings}

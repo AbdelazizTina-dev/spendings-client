@@ -17,7 +17,7 @@ export default function SpendingList({ spendings, setSpendings }) {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/spendings`, {
+    fetch(`http://localhost:8000/spendings`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -30,7 +30,7 @@ export default function SpendingList({ spendings, setSpendings }) {
       })
       .then((response) => {
         if (response.status === 200) {
-          setSpendings(response.body);
+          setSpendings(response.body.results);
         }
       })
       .catch((err) => {
@@ -40,7 +40,7 @@ export default function SpendingList({ spendings, setSpendings }) {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [setSpendings]);
 
   if (loading) return <Loader />;
 

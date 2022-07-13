@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const InputStyles = styled.input`
   font-family: var(--font-family);
-  border: none;
+  border: 'none';
+  background-color: ${(p) => p.isInvalid ? '#fa7a7a' : 'var(--color-white)'};
   padding: 10px 15px;
   font-size: 18px;
   font-weight: 700;
