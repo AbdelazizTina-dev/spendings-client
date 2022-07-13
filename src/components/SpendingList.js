@@ -12,9 +12,19 @@ import {
   AmountWrapper,
 } from "../styles/ComponentStyles";
 
-export default function SpendingList({ spendings, setSpendings, sortType }) {
+export default function SpendingList({
+  spendings,
+  setSpendings,
+  sortType,
+  currencyFilter,
+}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const filteredSpendings =
+    currencyFilter === "None"
+      ? spendings
+      : spendings.filter((spending) => spending.currency === currencyFilter);
 
   function sortAmount(spending_1, spending_2, mode) {
     //arbitary rate
@@ -108,7 +118,7 @@ export default function SpendingList({ spendings, setSpendings, sortType }) {
         </h1>
       )}
       {spendings.length > 0 &&
-        sortSpendings(spendings).map((spending) => (
+        sortSpendings(filteredSpendings).map((spending) => (
           <Spending key={spending.id}>
             <IconWrapper>
               <FiDollarSign color="var(--color-blue)" />

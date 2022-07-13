@@ -35,7 +35,7 @@ export default function Form({ setSpendings }) {
 
     if (state.amount <= 0) setAmountIsInvalid(true);
 
-    if (!descriptionIsInvalid && !amountIsInvalid) {
+    if (!descriptionIsInvalid && !amountIsInvalid && state !== initial_state) {
       postSpending({
         ...state,
         spent_at: formatISO(new Date()),

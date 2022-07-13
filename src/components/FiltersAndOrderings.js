@@ -7,7 +7,7 @@ import {
   CurrencyButton,
 } from "../styles/ComponentStyles";
 
-export default function CurrencyFilter({ setSortType }) {
+export default function CurrencyFilter({ setSortType, setCurrencyFilter }) {
   function sortChangeHandler(e) {
     setSortType(e.target.value);
   }
@@ -25,13 +25,13 @@ export default function CurrencyFilter({ setSortType }) {
         </Orderings>
         <CurrencyFilters>
           <li>
-            <CurrencyButton name="">ALL</CurrencyButton>
+            <CurrencyButton onClick={() => setCurrencyFilter("None")} name="">ALL</CurrencyButton>
           </li>
           <li>
-            <CurrencyButton name="HUF">HUF</CurrencyButton>
+            <CurrencyButton onClick={() => setCurrencyFilter("HUF")} name="HUF">HUF</CurrencyButton>
           </li>
           <li>
-            <CurrencyButton name="USD">USD</CurrencyButton>
+            <CurrencyButton onClick={() => setCurrencyFilter("USD")} name="USD">USD</CurrencyButton>
           </li>
         </CurrencyFilters>
       </FiltersWrapper>
