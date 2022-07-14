@@ -4,6 +4,7 @@ import { setupServer } from "msw/node";
 import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import App from "../App";
+import { formatISO } from "date-fns";
 
 const DUMMY_SPENDINGS = {
   results: [
@@ -122,6 +123,8 @@ const DUMMY_SPENDINGS = {
   ],
 };
 
+const timeNow = formatISO(new Date());
+
 const server = setupServer(
   rest.get(`http://localhost:8000/spendings`, (req, res, ctx) => {
     return res(ctx.json(DUMMY_SPENDINGS));
@@ -171,5 +174,49 @@ describe("SpendingList Component", () => {
     });
 
     expect(emptySpendingsMessage).toBeInTheDocument();
+  });
+
+  test("correctly filter spending list to only USD", async () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByTestId("usdFilter"));
+
+    const usdSpendings = await screen.findAllByTestId("spending");
+
+    expect(usdSpendings).toHaveLength(11);
+  });
+
+  test("correctly filter spending list to only HUF", async () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByTestId("hufFilter"));
+
+    const hufSpendings = await screen.findAllByTestId("spending");
+
+    expect(hufSpendings).toHaveLength(5);
+  });
+
+  test("correctly resets spending when clicking 'ALL' button", async () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByTestId("resetFilter"));
+
+    const resetSpendings = await screen.findAllByTestId("spending");
+
+    expect(resetSpendings).toHaveLength(16);
+  });
+
+  test("submitting empty form does nothing and error visual cue appears", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByTestId("submit"));
+
+    const descriptionStyle = getComputedStyle(
+      screen.getByPlaceholderText("description")
+    );
+    const amountStyle = getComputedStyle(screen.getByPlaceholderText("amount"));
+
+    expect(descriptionStyle.backgroundColor).toBe("rgb(250, 122, 122)");
+    expect(amountStyle.backgroundColor).toBe("rgb(250, 122, 122)");
   });
 });

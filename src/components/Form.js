@@ -96,7 +96,7 @@ export default function Form({ setSpendings }) {
           <option value="HUF">HUF</option>
           <option value="USD">USD</option>
         </SelectStyles>
-        <InputStyles onClick={formSubmitHandler} type="submit" value="Save" />
+        <InputStyles onClick={formSubmitHandler} data-testid="submit" type="submit" value="Save" />
       </FormStyles>
     </>
   );

@@ -25,13 +25,31 @@ export default function CurrencyFilter({ setSortType, setCurrencyFilter }) {
         </Orderings>
         <CurrencyFilters>
           <li>
-            <CurrencyButton onClick={() => setCurrencyFilter("None")} name="">ALL</CurrencyButton>
+            <CurrencyButton
+              onClick={() => setCurrencyFilter("None")}
+              name=""
+              data-testid="resetFilter"
+            >
+              ALL
+            </CurrencyButton>
           </li>
           <li>
-            <CurrencyButton onClick={() => setCurrencyFilter("HUF")} name="HUF">HUF</CurrencyButton>
+            <CurrencyButton
+              onClick={() => setCurrencyFilter("HUF")}
+              name="HUF"
+              data-testid="hufFilter"
+            >
+              HUF
+            </CurrencyButton>
           </li>
           <li>
-            <CurrencyButton onClick={() => setCurrencyFilter("USD")} name="USD">USD</CurrencyButton>
+            <CurrencyButton
+              onClick={() => setCurrencyFilter("USD")}
+              name="USD"
+              data-testid="usdFilter"
+            >
+              USD
+            </CurrencyButton>
           </li>
         </CurrencyFilters>
       </FiltersWrapper>
