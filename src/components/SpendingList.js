@@ -91,7 +91,7 @@ export default function SpendingList({
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
         setError(true);
       })
       .finally(() => {
@@ -119,7 +119,7 @@ export default function SpendingList({
       )}
       {spendings.length > 0 &&
         sortSpendings(filteredSpendings).map((spending) => (
-          <Spending key={spending.id}>
+          <Spending key={spending.id} data-testid="spending">
             <IconWrapper>
               <FiDollarSign color="var(--color-blue)" />
             </IconWrapper>
